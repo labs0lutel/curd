@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить объявление</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Добавить объявление о машине</h1>
+        <form id="adForm">
+            <label for="brand">Марка:</label>
+            <input type="text" id="brand" required>
+            <label for="model">Модель:</label>
+            <input type="text" id="model" required>
+            <label for="year">Год:</label>
+            <input type="number" id="year" required>
+            <label for="price">Цена:</label>
+            <input type="number" id="price" required>
+            <label for="image">Изображение:</label>
+            <input type="file" id="image" accept="image/*" required>
+            <button class="btn" type="submit">Добавить</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('adForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const ad = {
+                id: Date.now().toString(),
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                year: document.getElementById('year').value,
+                price: document.getElementById('price').value,
+            };
+
+            const fileInput = document.getElementById('image');
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+
+            const imageResponse = await fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const imageData = await imageResponse.json();
+            ad.image = imageData.url;
+
+            await fetch('/ads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(ad),
+            });
+
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

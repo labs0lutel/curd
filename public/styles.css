@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.ads-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.ad {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(50% - 20px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ad img {
+    width: 100%;
+    height: 200px; /* Фиксированная высота для изображения */
+    object-fit: cover; /* Обрезает изображение, чтобы оно вписалось в заданный размер */
+}
+
+.ad-details {
+    padding: 10px;
+    flex-grow: 1; /* Увеличивает карточку, чтобы заполнить доступное пространство */
+}
+
+.ad-details h2 {
+    margin: 0 0 10px 0;
+}
+
+.ad-details p {
+    margin: 5px 0;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    text-align: center; /* Центрируем текст */
+}
+
+.btn-delete:hover {
+    background-color: #e53935;
+    transform: scale(1.05); /* Увеличиваем кнопку при наведении */
+}
+
+.btn-delete:focus {
+    outline: none; /* Убираем контур при фокусе */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Добавляем тень при фокусе */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

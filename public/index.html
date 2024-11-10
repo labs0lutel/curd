@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Объявления о машинах</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Объявления о машинах</h1>
+        <button class="btn" onclick="window.location.href='add.html'">Добавить объявление</button>
+        <div class="ads-container" id="adsContainer"></div>
+    </div>
+
+    <script>
+        async function fetchAds() {
+            const response = await fetch('/ads');
+            const ads = await response.json();
+            const container = document.getElementById('adsContainer');
+            container.innerHTML = '';
+
+            ads.forEach(ad => {
+                const adElement = document.createElement('div');
+                adElement.classList.add('ad');
+                adElement.innerHTML = `
+                    <img src="${ad.image}" alt="${ad.brand} ${ad.model}">
+                    <div class="ad-details">
+                        <h2>${ad.brand} ${ad.model}</h2>
+                        <p>Год: ${ad.year}</p>
+                        <p>Цена: ${ad.price} ₽</p>
+                        <button class="btn-delete" onclick="deleteAd('${ad.id}')">Удалить</button>
+                    </div>
+                `;
+                container.appendChild(adElement);
+            });
+        }
+
+        async function deleteAd(id) {
+            await fetch(`/ads/${id}`, { method: 'DELETE' });
+            fetchAds();
+        }
+
+        fetchAds();
+    </script>
+</body>
+</html>
