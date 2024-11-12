@@ -20,7 +20,7 @@ const upload = multer({ storage: storage });
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use('/uploads', express.static('uploads')); // Статические файлы загруженных изображений
+app.use('/uploads', express.static('uploads')); 
 
 let ads = [];
 
